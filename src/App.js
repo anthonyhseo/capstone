@@ -2,28 +2,24 @@ import React from 'react';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
 
-import { Nav } from 'react-bootstrap';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-import Navbar from './components/Navbar/Navbar';
+import Dashboard from './components/Dashboard/Dashboard'
 import Landing from './components/Landing/Landing';
+import Navbar from './components/Navbar/Navbar';
+
+
 
 import './App.css';
-function click() {
-  console.log('hello');
-}
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar></Navbar>
+        <Navbar />
+        <Route exact path="/" component={Landing} />
 
-        <Landing />
+        <Route exact path="/dashboard" component={Dashboard} />
+
       </Router>
     </div>
   );
