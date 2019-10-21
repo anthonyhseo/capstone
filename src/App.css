@@ -20,3 +20,19 @@
 .App-link {
   color: #09d3ac;
 }
+
+.landing {
+  background: url('./assets/images/landing_page.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 90vh;
+}
+
+.landing-overlay {
+  background-color: rgba(77, 77, 77, 0.7);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
