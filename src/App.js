@@ -16,8 +16,8 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
-        <Route exact path="/" component={Landing} />
 
+        <Route exact path="/" component={Landing} />
         <Route exact path="/dashboard" component={Dashboard} />
 
       </Router>
