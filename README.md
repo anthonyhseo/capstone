@@ -1,1 +1,0 @@
-# Amenity Detector
