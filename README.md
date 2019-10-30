@@ -5,5 +5,6 @@
 2. npm install
 3. cd ../frontend
 4. npm install
-5. cd ../ npm install
-6. npm start
+5. cd ../
+6. npm install
+7. npm start
