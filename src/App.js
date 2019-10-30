@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
-import Dashboard from './components/Dashboard/Dashboard'
+import UploadPhoto from './components/UploadPhoto/UploadPhoto'
 import Landing from './components/Landing/Landing';
 import Navbar from './components/Navbar/Navbar';
 
@@ -18,7 +18,7 @@ function App() {
         <Navbar />
 
         <Route exact path="/" component={Landing} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/dashboard" component={UploadPhoto} />
 
       </Router>
     </div>
