@@ -9,19 +9,19 @@ const Dashboard = () => {
       <h2>Upload an image:</h2>
       <div className="container">
         <div className="row">
-          <div className="col">
+          <div className="col-md-4">
             Filename:
             <br/>
             <form action="POST">
-              <input type="file" accept="image/*"/>
+              <input type="file" class="form-control-file" accept="image/*"/>
               <button type="submit">Upload</button>
             </form>
             
           </div>
 
-          <div className="col">
+          <div className="col-md-8">
             This is where the image will be.
-            <img src="https://i.redd.it/8hgdbg4dr5u31.png" alt=""/>
+            <img class="img-fluid" src="https://i.redd.it/ta4o0gwjmdu31.jpg" alt=""/>
           </div>
         </div>
       </div>
