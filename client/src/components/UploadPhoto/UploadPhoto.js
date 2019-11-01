@@ -1,47 +1,52 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import './UploadPhoto.css';
+import './UploadPhoto.css'
 
 class UploadPhoto extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       file: '',
       imagePreviewUrl: ''
-    };
+    }
   }
 
   handleChange(e) {
-    let reader = new FileReader();
-    let file = e.target.files[0];
+    let reader = new FileReader()
+    let file = e.target.files[0]
 
     reader.onloadend = () => {
       this.setState({
         file: file,
         imagePreviewUrl: reader.result
-      });
-    };
+      })
+    }
 
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file)
   }
 
   handleClear(e) {
     this.setState({
       file: '',
       imagePreviewUrl: ''
-    });
+    })
+  }
+
+
+  handleUploadImage(e) {
+
   }
 
   render() {
-    const { imagePreviewUrl, file } = this.state;
-    let _imagePreview = null;
+    const { imagePreviewUrl, file } = this.state
+    let _imagePreview = null
     if (imagePreviewUrl) {
       _imagePreview = (
         <img className="img-fluid" src={imagePreviewUrl} alt={file} />
-      );
+      )
     } else {
-      _imagePreview = <div>Please select an image for preview</div>;
+      _imagePreview = <div>Please select an image for preview</div>
     }
     return (
       <div className="upload-photo">
@@ -52,7 +57,7 @@ class UploadPhoto extends Component {
             <div className="col-md-4">
               Filename:
               <br />
-              <form action="POST">
+              <form onSubmit={this.handleUploadImage}>
                 <input
                   type="file"
                   class="form-control-file"
@@ -72,8 +77,8 @@ class UploadPhoto extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default UploadPhoto;
+export default UploadPhoto

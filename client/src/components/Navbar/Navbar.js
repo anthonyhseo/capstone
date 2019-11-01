@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 import { Link } from 'react-router-dom'
 
@@ -22,8 +22,6 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav ml-auto">
-            <li className="nav-item active">
-            </li>
             <li className="nav-item">
               <Link className="nav-link" to="/">
                 Register
@@ -38,7 +36,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
