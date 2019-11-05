@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 import './UploadPhoto.css'
 
@@ -22,7 +23,7 @@ class UploadPhoto extends Component {
         imagePreviewUrl: reader.result
       })
     }
-
+    
     reader.readAsDataURL(file)
   }
 
@@ -31,11 +32,20 @@ class UploadPhoto extends Component {
       file: '',
       imagePreviewUrl: ''
     })
+
+    console.log(this.state)
   }
 
-
   handleUploadImage(e) {
-
+    e.preventDefault()
+    const form = new FormData()
+    form.append('myFile', this.state.file)
+    axios
+      .post('http://localhost:3001/api/upload', form)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => console.log(error))
   }
 
   render() {
@@ -55,19 +65,21 @@ class UploadPhoto extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              Filename:
               <br />
-              <form onSubmit={this.handleUploadImage}>
+              <form onSubmit={e => this.handleUploadImage(e)}>
                 <input
                   type="file"
-                  class="form-control-file"
+                  className="form-control-file"
                   onChange={e => this.handleChange(e)}
                   accept="image/*"
                 />
-                <button type="submit">Upload</button>
+                <button className="btn btn-primary" type="submit">
+                  Upload
+                </button>
                 <input
                   type="button"
                   value="Clear"
+                  className="btn btn-danger"
                   onClick={e => this.handleClear(e)}
                 />
               </form>

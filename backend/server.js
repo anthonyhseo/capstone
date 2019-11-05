@@ -8,7 +8,9 @@ const PORT = process.env.PORT || 3001
 
 const app = express()
 
+
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors())
 
 const storage = multer.diskStorage({
   destination: './public/uploads',

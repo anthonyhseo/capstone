@@ -1,15 +1,14 @@
-import React from 'react';
+import React from 'react'
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import UploadPhoto from './components/UploadPhoto/UploadPhoto'
-import Landing from './components/Landing/Landing';
-import Navbar from './components/Navbar/Navbar';
+import Landing from './components/Landing/Landing'
+import Navbar from './components/Navbar/Navbar'
+import LoginPage from './components/LoginPage/LoginPage'
+import Register from './components/Register/Register'
 
-
-
-import './App.css';
+import './App.css'
 
 function App() {
   return (
@@ -19,10 +18,11 @@ function App() {
 
         <Route exact path="/" component={Landing} />
         <Route exact path="/dashboard" component={UploadPhoto} />
-
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/register" component={Register} />
       </Router>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
