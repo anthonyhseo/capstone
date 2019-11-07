@@ -6,10 +6,10 @@ export default class ResultsList extends Component {
         return (
             <div>
                 <ul className="results-ul">
-                    <li className="results-li">Chair 95%</li>
-                    <li className="results-li">Stove 78%</li>
-                    <li className="results-li">Oven 73%</li>
-                    <li className="results-li">Sink 99%</li>
+                    <li className="results-li">Chair</li>
+                    <li className="results-li">Stove</li>
+                    <li className="results-li">Oven</li>
+                    <li className="results-li">Sink</li>
                 </ul>
             </div>
         )
