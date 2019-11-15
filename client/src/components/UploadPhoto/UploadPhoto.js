@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {withRouter} from 'react-router'
+import { withRouter } from 'react-router'
 import axios from 'axios'
 
 import Results from '../Results/Results'
@@ -29,7 +29,7 @@ class UploadPhoto extends Component {
         imagePreviewUrl: reader.result
       })
     }
-    
+
     reader.readAsDataURL(file)
   }
 
@@ -53,7 +53,6 @@ class UploadPhoto extends Component {
           ...this.state,
           returnedResults: true,
           classification: response.data
-
         })
       })
       .catch(error => console.log(error))
@@ -69,8 +68,8 @@ class UploadPhoto extends Component {
     } else {
       _imagePreview = <div>Please select an image for preview</div>
     }
-    return (
-      !returnedResults ? (<div className="upload-photo">
+    return !returnedResults ? (
+      <div className="upload-photo">
         <h1>This is the upload photo page.</h1>
         <h2>Upload an image:</h2>
         <div className="container">
@@ -99,7 +98,12 @@ class UploadPhoto extends Component {
             <div className="col-md-8">{_imagePreview}</div>
           </div>
         </div>
-      </div>) : (<Results image={this.state.imagePreviewUrl} classification={this.state.classification} />)
+      </div>
+    ) : (
+      <Results
+        image={this.state.imagePreviewUrl}
+        classification={this.state.classification}
+      />
     )
   }
 }
