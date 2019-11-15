@@ -1,0 +1,32 @@
+body {
+    background-color: #2F303A;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;  
+}
+
+.results-list {
+    background-color: lightgray;
+    width: 50%;
+}
+
+
+.results-image {
+    width: 50%;
+}
+
+
+h1 {
+    text-align: left;
+    margin-left: 50px;
+    margin-top: 50px;
+    color: white;
+}
+
+h3{
+    text-align: left;
+    margin-left: 50px;
+    color: white
+}
