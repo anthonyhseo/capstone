@@ -18,14 +18,18 @@ const imageClassification = async path => {
   const image = readImage(path)
   const mobilenetModel = await mobilenet.load()
   const predictions = await mobilenetModel.classify(image)
-  console.log('Classification Results: ', predictions)
+  //console.log('Classification Results: ', predictions)
+  return predictions
 }
 
+/*
 if (process.argv.length !== 3)
   throw new Error('Incorrect arguments: node classify.js <IMAGE_FILE>')
 
 imageClassification(process.argv[2])
+*/
 
+module.exports = imageClassification
 
 /*
 const readImage = path => {

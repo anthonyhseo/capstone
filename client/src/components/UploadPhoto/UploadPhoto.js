@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import {withRouter} from 'react-router'
 import axios from 'axios'
+
+import Results from '../Results/Results'
 
 import './UploadPhoto.css'
 
@@ -9,7 +12,9 @@ class UploadPhoto extends Component {
 
     this.state = {
       file: '',
-      imagePreviewUrl: ''
+      imagePreviewUrl: '',
+      classification: [],
+      returnedResults: false
     }
   }
 
@@ -19,6 +24,7 @@ class UploadPhoto extends Component {
 
     reader.onloadend = () => {
       this.setState({
+        ...this.state,
         file: file,
         imagePreviewUrl: reader.result
       })
@@ -43,13 +49,18 @@ class UploadPhoto extends Component {
     axios
       .post('http://localhost:3001/api/upload', form)
       .then(response => {
-        console.log(response)
+        this.setState({
+          ...this.state,
+          returnedResults: true,
+          classification: response.data
+
+        })
       })
       .catch(error => console.log(error))
   }
 
   render() {
-    const { imagePreviewUrl, file } = this.state
+    const { imagePreviewUrl, file, returnedResults } = this.state
     let _imagePreview = null
     if (imagePreviewUrl) {
       _imagePreview = (
@@ -59,7 +70,7 @@ class UploadPhoto extends Component {
       _imagePreview = <div>Please select an image for preview</div>
     }
     return (
-      <div className="upload-photo">
+      !returnedResults ? (<div className="upload-photo">
         <h1>This is the upload photo page.</h1>
         <h2>Upload an image:</h2>
         <div className="container">
@@ -88,9 +99,9 @@ class UploadPhoto extends Component {
             <div className="col-md-8">{_imagePreview}</div>
           </div>
         </div>
-      </div>
+      </div>) : (<Results image={this.state.imagePreviewUrl} classification={this.state.classification} />)
     )
   }
 }
 
-export default UploadPhoto
+export default withRouter(UploadPhoto)
