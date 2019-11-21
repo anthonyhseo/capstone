@@ -4,6 +4,8 @@ const path = require('path')
 const cors = require('cors')
 const multer = require('multer')
 
+const imageClassification = require('./classify.js')
+
 const PORT = process.env.PORT || 3001
 
 const app = express()
@@ -28,14 +30,17 @@ app.get('/', (req, res) => {
   res.send('Got the request')
 })
 
-app.post('/api/upload', upload.single('myFile'), (req, res, next) => {
+app.post('/api/upload', upload.single('myFile'), async (req, res, next) => {
   const file = req.file
   if (!file) {
     const error = new Error('Please upload a file')
     error.httpStatusCode = 400
     return next(error)
   }
-  res.send(file)
+
+  const result = await imageClassification(`./public/uploads/${file.filename}`)
+  console.log(result)
+  res.send(result)
 })
 
 app.listen(PORT, () => {
