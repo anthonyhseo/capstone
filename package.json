@@ -18,5 +18,8 @@
   "homepage": "https://github.com/anthonyhseo/capstone_frontend#readme",
   "dependencies": {
     "concurrently": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
