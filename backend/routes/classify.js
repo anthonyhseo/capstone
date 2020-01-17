@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const multer = require('multer')
+const path = require('path')
 
-const imageClassification = require('./classify.js')
+const imageClassification = require('../classify')
 
 const storage = multer.diskStorage({
   destination: './public/uploads',
