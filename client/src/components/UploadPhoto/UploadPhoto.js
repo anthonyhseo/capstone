@@ -124,12 +124,13 @@ class UploadPhoto extends Component {
                 </button>
               </div>
               <div className='clear-btn'>
-                <input
-                  type='button'
-                  value='Clear'
+                <button
+                  type='submit'
                   className='btn btn-danger'
                   onClick={e => this.handleClear(e)}
-                />
+                  >
+                    Clear
+                </button>
               </div>
             </div>
           </form>

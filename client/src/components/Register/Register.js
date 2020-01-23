@@ -6,8 +6,10 @@ class Register extends Component {
   state = {
     firstName: '',
     lastName: '',
+    username: '',
     email: '',
-    password: ''
+    password: '',
+    passwordConfirm: ''
   };
 
   handleChange(e) {
@@ -27,39 +29,57 @@ class Register extends Component {
         <div className='register'>
           <h2>Registration Form</h2>
           <form onSubmit={e => this.onSubmit(e)}>
-            <label>First Name</label>
             <input
+              placeholder="First Name"
               type='text'
               name='firstName'
-              placeholder='First Name'
               value={this.state.firstName}
               onChange={e => this.handleChange(e)}
+              required
             />
-            <label>Last Name</label>
             <input
+              placeholder="Last Name"
               type='text'
               name='lastName'
-              placeholder='Last Name'
               value={this.state.lastName}
               onChange={e => this.handleChange(e)}
+              required
             />
-            <label>Email</label>
             <input
+              placeholder="Username"
+              type='text'
+              name='username'
+              value={this.state.username}
+              onChange={e => this.handleChange(e)}
+              required
+            />
+            <input
+              placeholder="Email"
               type='email'
               name='email'
-              placeholder='Email'
               value={this.state.email}
               onChange={e => this.handleChange(e)}
+              required
             />
-            <label>Password</label>
             <input
+              placeholder="Password"
               type='password'
               name='password'
-              placeholder='Password'
               value={this.state.password}
               onChange={e => this.handleChange(e)}
+              required
             />
-            <input type='submit' className='btn-primary' value='Register' />
+            <input
+              placeholder="Confirm Password"
+              type='password'
+              name='passwordConfirm'
+              value={this.state.passwordConfirm}
+              onChange={e => this.handleChange(e)}
+              required
+            />
+            <button type='submit' className='btn btn-primary register-btn' >
+              Register
+            </button>
           </form>
         </div>
       </div>
