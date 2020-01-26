@@ -8,6 +8,7 @@ import Navbar from './components/Navbar/Navbar';
 import LoginPage from './components/LoginPage/LoginPage';
 import Register from './components/Register/Register';
 import Results from './components/Results/Results';
+import Dashboard from './components/Dashboard/Dashboard';
 
 import './App.css';
 
@@ -17,10 +18,11 @@ function App() {
       <Router>
         <Navbar />
         <Route exact path='/' component={Landing} />
-        <Route exact path='/dashboard' component={UploadPhoto} />
+        <Route exact path='/upload' component={UploadPhoto} />
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/register' component={Register} />
         <Route exact path='/results' component={Results} />
+        <Route exact path ='/dashboard' component={Dashboard} />
       </Router>
     </div>
   );
