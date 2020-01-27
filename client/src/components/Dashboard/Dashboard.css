@@ -6,6 +6,12 @@ body,
   margin: 0px !important;
 }
 
+.dashboard-h2 {
+  font-family: arial;
+    line-height: 16px;
+    color: #ffffff;
+    margin-top: 20px;
+}
 
 .background-img-container {
   text-align: center;
