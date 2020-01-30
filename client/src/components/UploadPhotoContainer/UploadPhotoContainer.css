@@ -1,0 +1,18 @@
+.photo-container{
+    height: 70%;
+    width: 85%;
+    margin: auto;
+    margin-top: 2.5%;
+    background: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    flex-flow: row wrap;
+    padding: 2%;
+    overflow: auto;
+    display: -webkit-flex;
+     -webkit-justify-content: center;
+    justify-content: space-evenly;
+    
+}
+
+    
