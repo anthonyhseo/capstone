@@ -1,0 +1,10 @@
+[
+    { "name": "Kitchen", "image": "https://i.imgur.com/VgAAKOf" },
+    { "name": "Living Room", "image": "https://i.imgur.com/zTlz8vo" },
+    { "name": "Pool", "image": "https://i.imgur.com/XiF11Eu" },
+    { "name": "Lounge", "image": "https://i.imgur.com/kjNoHnJ" },
+    { "name": "Entry", "image": "https://i.imgur.com/WwaThit" },
+    { "name": "Garage", "image": "https://i.imgur.com/yIyV5Hh" },
+    { "name": "Theater", "image": "https://i.imgur.com/gBmRnF7" },
+    { "name": "Sport Court", "image": "https://i.imgur.com/hXBq79W" }
+  ]

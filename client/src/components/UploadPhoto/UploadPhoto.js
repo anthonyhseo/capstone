@@ -1,17 +1,13 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router'
-import axios from 'axios'
-
-import Results from '../Results/Results'
-
-import './UploadPhoto.css'
-
+import React, { Component } from 'react';
+import { withRouter } from 'react-router';
+import axios from 'axios';
+import Results from '../Results/Results';
+import './UploadPhoto.css';
 import LoadingOverlay from 'react-loading-overlay';
-
 
 class UploadPhoto extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       file: '',
@@ -19,37 +15,37 @@ class UploadPhoto extends Component {
       classification: [],
       returnedResults: false,
       isLoading: false
-    }
+    };
   }
 
   handleChange(e) {
-    let reader = new FileReader()
-    let file = e.target.files[0]
+    let reader = new FileReader();
+    let file = e.target.files[0];
 
     reader.onloadend = () => {
       this.setState({
         ...this.state,
         file: file,
         imagePreviewUrl: reader.result
-      })
-    }
+      });
+    };
 
-    reader.readAsDataURL(file)
+    reader.readAsDataURL(file);
   }
 
   handleClear(e) {
     this.setState({
       file: '',
       imagePreviewUrl: ''
-    })
+    });
 
-    console.log(this.state)
+    console.log(this.state);
   }
 
   handleUploadImage(e) {
-    e.preventDefault()
-    const form = new FormData()
-    form.append('myFile', this.state.file)
+    e.preventDefault();
+    const form = new FormData();
+    form.append('myFile', this.state.file);
     axios
       .post('http://ec2-54-202-80-154.us-west-2.compute.amazonaws.com:3001/api/v1/classify', form)
       // .post('http://localhost:3001/api/v1/classify', form)
@@ -57,37 +53,36 @@ class UploadPhoto extends Component {
         this.setState({
           ...this.state,
           returnedResults: true,
-          classification: response.data,
-        })
+          classification: response.data
+        });
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
   }
 
   // Resetting page back to upload photo
-  handleReset(e){
+  handleReset(e) {
     this.setState({
-      returnedResults: false, 
+      returnedResults: false,
       imagePreviewUrl: null,
       isLoading: false
-    })
+    });
   }
 
-  displayLoadingSpinner = () =>{
+  displayLoadingSpinner = () => {
     this.setState({
       isLoading: !this.state.isLoading
-    })
-  }
-
+    });
+  };
 
   render() {
-    const { imagePreviewUrl, file, returnedResults } = this.state
-    let _imagePreview = null
-    let loadingSpinner = null
+    const { imagePreviewUrl, file, returnedResults } = this.state;
+    let _imagePreview = null;
+    let loadingSpinner = null;
     // Set properties of loading overlay
-    if (this.state.isLoading){
+    if (this.state.isLoading) {
       loadingSpinner = (
-        <div className={`overlay ${this.state.isLoading ? "appear" : ""}`}>
-          <div className={"overlay-text"}>
+        <div className={`overlay ${this.state.isLoading ? 'appear' : ''}`}>
+          <div className={'overlay-text'}>
             <LoadingOverlay
               active={true}
               spinner={true}
@@ -95,44 +90,52 @@ class UploadPhoto extends Component {
             />
           </div>
         </div>
-      )
+      );
     }
     if (imagePreviewUrl) {
       _imagePreview = (
-        <img className="img-fluid" src={imagePreviewUrl} alt={file} />
-      )
+        <img className='img-fluid' src={imagePreviewUrl} alt={file} />
+      );
     } else {
-      _imagePreview = <div>Please select an image for preview</div>
+      _imagePreview = <p>Please select an image for preview</p>;
     }
     return !returnedResults ? (
-      <div className="upload-photo">
-        {loadingSpinner}    
-        <h1>This is the upload photo page.</h1>
-        <h2>Upload an image:</h2>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-4">
-              <br />
-              <form onSubmit={e => this.handleUploadImage(e)}>
-                <input
-                  type="file"
-                  className="form-control-file"
-                  onChange={e => this.handleChange(e)}
-                  accept="image/*"
-                />
-                <button className="btn btn-primary" type="submit" onClick={this.displayLoadingSpinner}>
+      <div className='upload-photo'>
+        {loadingSpinner}
+        <h1 className='textHeading'> Upload a photo.</h1>
+
+        <div className='upload-container'>
+          <form onSubmit={e => this.handleUploadImage(e)}>
+            <div className='choose-file'>
+              <input
+                type='file'
+                className='form-control-file'
+                onChange={e => this.handleChange(e)}
+                accept='image/*'
+              />
+            </div>
+            <div className='buttons'>
+              <div className='upload-btn'>
+                <button
+                  className='btn btn-primary'
+                  type='submit'
+                  onClick={this.displayLoadingSpinner}
+                >
                   Upload
                 </button>
-                <input
-                  type="button"
-                  value="Clear"
-                  className="btn btn-danger"
+              </div>
+              <div className='clear-btn'>
+                <button
+                  type='submit'
+                  className='btn btn-danger'
                   onClick={e => this.handleClear(e)}
-                />
-              </form>
+                  >
+                    Clear
+                </button>
+              </div>
             </div>
-            <div className="col-md-8">{_imagePreview}</div>
-          </div>
+          </form>
+          <div className='image-preview'>{_imagePreview}</div>
         </div>
       </div>
     ) : (
@@ -140,11 +143,9 @@ class UploadPhoto extends Component {
         image={this.state.imagePreviewUrl}
         classification={this.state.classification}
         reset={() => this.handleReset()}
-
       />
-
-    )
+    );
   }
 }
 
-export default withRouter(UploadPhoto)
+export default withRouter(UploadPhoto);

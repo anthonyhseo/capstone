@@ -1,0 +1,44 @@
+.main-registration-container {
+  text-align: center;
+  height: 100%;
+  background: url('../../assets/images/landing_page_dark.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  overflow: auto;
+}
+
+@media all and (min-width: 480px) {
+  .register {
+    margin: 100px auto;
+    width: 55%;
+    height: auto;
+    padding: 15px 0px 15px 15px;
+    border-radius: 5px;
+    font-family: arial;
+    line-height: 16px;
+    color: #333333;
+    font-size: 14px;
+    background: #ffffff;
+    overflow: auto;
+  }
+
+  form label,
+  form input {
+    display: flex;
+    width: 90%;
+  }
+
+  form label {
+    margin-top: 10px;
+  }
+
+  form input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: solid 1px #bdc7d8;
+  }
+
+  .register-btn{
+    width: 25%;
+  }
+}
