@@ -1,6 +1,7 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const bodyParser = require('body-parser')
+const passport = require('passport')
 const cors = require('cors')
 
 const users = require('./routes/users')
@@ -18,6 +19,9 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cors())
+
+app.use(passport.initialize())
+require('./config/passport')(passport)
 
 app.use('/api/v1/users', users)
 app.use('/api/v1/classify', classify)
