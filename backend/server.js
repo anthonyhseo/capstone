@@ -6,6 +6,7 @@ const cors = require('cors')
 
 const users = require('./routes/users')
 const classify = require('./routes/classify')
+const image = require('./routes/image')
 
 const connectDB = require('./config/db')
 
@@ -25,6 +26,7 @@ require('./config/passport')(passport)
 
 app.use('/api/v1/users', users)
 app.use('/api/v1/classify', classify)
+app.use('/api/v1/image', image)
 
 app.get('/', (req, res) => {
   res.send('Got the request')
