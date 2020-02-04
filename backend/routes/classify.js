@@ -1,37 +1,39 @@
 const express = require('express')
 const router = express.Router()
-const multer = require('multer')
-const path = require('path')
+const passport = require('passport')
 
-const imageClassification = require('../classify')
+const {
+  test,
+  testAuth,
+  home,
+  classify,
+  authClassify,
+  getClassifications,
+  upload
+} = require('../controllers/classify')
 
-const storage = multer.diskStorage({
-  destination: './public/uploads',
-  filename: (req, file, cb) => {
-    cb(null, 'IMAGE-' + Date.now() + path.extname(file.originalname))
-  }
-})
+router.route('/').get(home)
+router.route('/test').get(test)
 
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 10000000 }
-})
+router.get(
+  '/testauth',
+  passport.authenticate('jwt', { session: false }),
+  testAuth
+)
 
-router.get('/', (req, res) => {
-  res.send('This is from the classify')
-})
+router.post('/', upload.single('myFile'), classify)
 
-router.post('/', upload.single('myFile'), async (req, res, next) => {
-  const file = req.file
-  if (!file) {
-    const error = new Error('Please upload a file')
-    error.httpStatusCode = 400
-    return next(error)
-  }
+router.post(
+  '/authClassify',
+  passport.authenticate('jwt', { session: false }),
+  upload.single('myFile'),
+  authClassify
+)
 
-  const result = await imageClassification(`./public/uploads/${file.filename}`)
-  console.log(result)
-  res.send(result)
-})
+router.get(
+  '/getClassifications',
+  passport.authenticate('jwt', { session: false }),
+  getClassifications
+)
 
 module.exports = router

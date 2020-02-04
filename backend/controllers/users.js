@@ -19,14 +19,16 @@ exports.registerUser = async (req, res) => {
       password: req.body.password
     })
 
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(newUser.password, salt, (err, hash) => {
-        if (err) throw err
+    bcrypt.genSalt(10, (saltErr, salt) => {
+      bcrypt.hash(newUser.password, salt, async (hashErr, hash) => {
+        if (hashErr) throw hashErr
         newUser.password = hash
-        newUser
-          .save()
-          .then(user => res.send(user))
-          .catch(err => console.log(err))
+        try {
+          const user = await newUser.save()
+          res.send(user)
+        } catch (error) {
+          console.log(error)
+        }
       })
     })
   } catch (err) {
