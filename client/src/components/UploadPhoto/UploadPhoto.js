@@ -47,7 +47,8 @@ class UploadPhoto extends Component {
     const form = new FormData();
     form.append('myFile', this.state.file);
     axios
-      .post('http://localhost:3001/api/v1/classify', form)
+      .post('http://ec2-54-202-80-154.us-west-2.compute.amazonaws.com:3001/api/v1/classify', form)
+      // .post('http://localhost:3001/api/v1/classify', form)
       .then(response => {
         this.setState({
           ...this.state,
