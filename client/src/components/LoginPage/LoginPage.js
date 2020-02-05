@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { loginUser } from '../../actions/authActions'
+import axios from 'axios';
 import './LoginPage.css'
 
 class LoginPage extends Component {
@@ -23,12 +24,43 @@ class LoginPage extends Component {
     this.props.loginUser()
   }
 
+  // Handles POST request to server to login
+  async onSubmit(e) {
+    e.preventDefault()
+    console.log(this.state)
+
+    // Destructure state
+    const {username, password} = this.state
+
+    // Create a user object to pass as the body in POST request
+    const user = {
+      username,
+      password
+    }
+
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }  
+
+      const body = JSON.stringify(user)
+      const res = await axios.post('http://ec2-54-202-80-154.us-west-2.compute.amazonaws.com:3001/api/v1/users/login', body, config)
+      console.log(res.data)
+
+    } catch (err) {
+      console.error(err.response.data)
+    }
+  }
+
   render() {
     return (
       <div className='login-container'>
         <div className='login'>
           <h2>Please Login</h2>
-          <form >
+          <form onSubmit={e => this.onSubmit(e)}>
             <input
               placeholder="Username"
               type='text'
@@ -45,10 +77,16 @@ class LoginPage extends Component {
               onChange={e => this.handleChange(e)}
               required
             />
+          
+          <button type='submit'>
+            Login
+
+          </button>
           </form>
-        <Link onClick={e => this.onClick(e)} to="/dashboard" className="btn btn-primary login-btn">
+          {/* The Link is used to go straight to the dashboard */}
+        {/* <Link onClick={e => this.onClick(e)} to="/dashboard" className="btn btn-primary login-btn">
           Login
-        </Link>
+        </Link> */}
         </div>
       </div>
     )
