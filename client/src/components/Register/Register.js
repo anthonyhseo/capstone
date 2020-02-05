@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
 import './Register.css';
+import axios from 'axios';
 
 class Register extends Component {
   state = {
@@ -12,15 +12,43 @@ class Register extends Component {
     passwordConfirm: ''
   };
 
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     });
   }
 
-  onSubmit(e) {
+  async onSubmit(e) {
     e.preventDefault();
     console.log(this.state);
+    
+    // Destructure state to build body to send with Axios post
+    const {username, password} = this.state
+
+    // Create a newUser object to pass as the body
+    const newUser = {
+      username,
+      password
+    }
+
+    try {
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+
+      const body = JSON.stringify(newUser)
+
+      const res = await axios.post('http://ec2-54-202-80-154.us-west-2.compute.amazonaws.com:3001/api/v1/users/register', body, config)
+      console.log(res.data)
+      
+    } catch (err) {
+      console.error(err.response.data)
+      
+    }
   }
 
   render() {
