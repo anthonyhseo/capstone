@@ -46,14 +46,17 @@ class UploadPhoto extends Component {
     e.preventDefault();
     const form = new FormData();
     form.append('myFile', this.state.file);
+
+    axios.defaults.headers['Authorization'] =
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIzIiwiaWQiOiI1ZTI4ZTEwMDkwMmVmOTFhMjk0ZTBjNjIiLCJpYXQiOjE1ODA3MTI2ODcsImV4cCI6MTU4MDc5OTA4N30.F5iQT1um-LzJcmkx-QtNHOi8CFL6wOBcMhYjwU7_Dz4'
     axios
-      .post('http://ec2-54-202-80-154.us-west-2.compute.amazonaws.com:3001/api/v1/classify', form)
       // .post('http://localhost:3001/api/v1/classify', form)
+      .post('http://localhost:3001/api/v1/classify/authClassify', form)
       .then(response => {
         this.setState({
           ...this.state,
           returnedResults: true,
-          classification: response.data
+          classification: response.data.classification
         });
       })
       .catch(error => console.log(error));
