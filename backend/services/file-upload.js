@@ -4,8 +4,8 @@ const multerS3 = require('multer-s3')
 
 // Setup AWS config
 aws.config.update({
-    secretAccessKey: '0PjjhIpfFC6BOxOisAG2b0eEnGq7wjxawKn3+TVU',
-    accessKeyId: 'AKIAJDQ4JU3VQY7PTIEQ',
+    secretAccessKey: '<>',
+    accessKeyId: '<>',
     region: 'us-west-2'
 })
 
