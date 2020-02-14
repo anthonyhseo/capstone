@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/anthonyhseo/capstone_frontend#readme",
   "dependencies": {
-    "concurrently": "^5.0.0"
+    "aws-sdk": "^2.614.0",
+    "concurrently": "^5.0.0",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0"
   }
 }

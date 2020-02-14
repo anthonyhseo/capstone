@@ -12,9 +12,9 @@ export default class UploadPhotoContainer extends Component {
   }
   componentWillMount() {
     axios.defaults.headers['Authorization'] =
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIzIiwiaWQiOiI1ZTI4ZTEwMDkwMmVmOTFhMjk0ZTBjNjIiLCJpYXQiOjE1ODA3MTI2ODcsImV4cCI6MTU4MDc5OTA4N30.F5iQT1um-LzJcmkx-QtNHOi8CFL6wOBcMhYjwU7_Dz4'
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIzIiwiaWQiOiI1ZTI4ZTEwMDkwMmVmOTFhMjk0ZTBjNjIiLCJpYXQiOjE1ODA5NDI0OTYsImV4cCI6MTU4MTAyODg5Nn0.2_nnHXEWWbaTMgPBrvBzK1pq-t8q58DBOuwzLqUybs4'
     axios
-      .get('http://localhost:3001/api/v1/classify/getClassifications')
+      .get('http://ec2-54-202-80-154.us-west-2.compute.amazonaws.com:3001/api/v1/classify/getClassifications')
       .then(res => {
         console.log(res.data)
         this.setState({ classifications: res.data })
