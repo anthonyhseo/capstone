@@ -4,10 +4,11 @@ const multerS3 = require('multer-s3')
 
 // Setup AWS config
 aws.config.update({
-    secretAccessKey: '0PjjhIpfFC6BOxOisAG2b0eEnGq7wjxawKn3+TVU',
-    accessKeyId: 'AKIAJDQ4JU3VQY7PTIEQ',
+    secretAccessKey: '<>',
+    accessKeyId: '<>',
     region: 'us-west-2'
 })
+
 
 // Create S3 instance
 const s3 = new aws.S3()
@@ -31,6 +32,7 @@ var upload = multer({
             cb(null, {fileName: 'TESTING META DATA'})
         },
         key: function(req, file, cb){
+            console.log(file)
             cb(null, Date.now().toString())
         }
     })

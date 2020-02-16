@@ -9,21 +9,14 @@ router.get('/image-upload', (req, res) => {
     return res.json({msg: 'I work'})
 })
 
-// router.post('/image-upload', (req, res) => {
-//     singleUpload(req, res, (err) => {
-//         if (err) {
-//             return res.status(422).send({errors: [{title: 'File Upload Error', detail: err.message, params: req.params}]})
-//         }
-//         return res.json({'imageUrl' : req.file.location})
-//     })
-// })
+
 
 router.post('/image-upload', (req, res) => {
     singleUpload(req, res, (err) => {
         if (err) {
             return res.status(422).send({errors: [{title: 'File Upload Error', detail: err.message}]})
         }
-        return res.json({'imageUrl' : req.file.location})
+        return res.json({'imageUrl' : req.file.location, name: req.file.originalname})
     })
 })
 
