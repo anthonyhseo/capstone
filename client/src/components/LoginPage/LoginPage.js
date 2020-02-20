@@ -46,14 +46,20 @@ class LoginPage extends Component {
         }
       }
 
-      const body = JSON.stringify(user)
       const res = await axios.post(
         'http://localhost:3001/api/v1/users/login',
-        body,
+        user,
         config
       )
-      localStorage.setItem('jwtToken', res)
-      console.log(res.data)
+
+      if (res.data.success) {
+        localStorage.setItem('jwtToken', res.data.token)
+        console.log(res.data)
+        this.props.loginUser(res.data.token)
+        this.props.history.push('/dashboard')
+      } else {
+        console.log('username or password is incorrect')
+      }
     } catch (err) {
       console.error(err.response.data)
     }
@@ -61,28 +67,28 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div className="login-container">
-        <div className="login">
+      <div className='login-container'>
+        <div className='login'>
           <h2>Please Login</h2>
           <form onSubmit={e => this.onSubmit(e)}>
             <input
-              placeholder="Username"
-              type="text"
-              name="username"
+              placeholder='Username'
+              type='text'
+              name='username'
               value={this.state.username}
               onChange={e => this.handleChange(e)}
               required
             />
             <input
-              placeholder="Password"
-              type="password"
-              name="password"
+              placeholder='Password'
+              type='password'
+              name='password'
               value={this.state.password}
               onChange={e => this.handleChange(e)}
               required
             />
 
-            <button type="submit">Login</button>
+            <button type='submit'>Login</button>
           </form>
           {/* The Link is used to go straight to the dashboard */}
           {/* <Link onClick={e => this.onClick(e)} to="/dashboard" className="btn btn-primary login-btn">

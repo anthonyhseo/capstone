@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router';
-import axios from 'axios';
-import Results from '../Results/Results';
-import './UploadPhoto.css';
-import LoadingOverlay from 'react-loading-overlay';
+import React, { Component } from 'react'
+import { withRouter } from 'react-router'
+import axios from 'axios'
+import Results from '../Results/Results'
+import './UploadPhoto.css'
+import LoadingOverlay from 'react-loading-overlay'
 
 class UploadPhoto extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       file: '',
@@ -15,40 +15,39 @@ class UploadPhoto extends Component {
       classification: [],
       returnedResults: false,
       isLoading: false
-    };
+    }
   }
 
   handleChange(e) {
-    let reader = new FileReader();
-    let file = e.target.files[0];
+    let reader = new FileReader()
+    let file = e.target.files[0]
 
     reader.onloadend = () => {
       this.setState({
         ...this.state,
         file: file,
         imagePreviewUrl: reader.result
-      });
-    };
+      })
+    }
 
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file)
   }
 
   handleClear(e) {
     this.setState({
       file: '',
       imagePreviewUrl: ''
-    });
+    })
 
-    console.log(this.state);
+    console.log(this.state)
   }
 
   handleUploadImage(e) {
-    e.preventDefault();
-    const form = new FormData();
-    form.append('myFile', this.state.file);
+    e.preventDefault()
+    const form = new FormData()
+    form.append('myFile', this.state.file)
 
-    axios.defaults.headers['Authorization'] =
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIzIiwiaWQiOiI1ZTI4ZTEwMDkwMmVmOTFhMjk0ZTBjNjIiLCJpYXQiOjE1ODA5NDI0OTYsImV4cCI6MTU4MTAyODg5Nn0.2_nnHXEWWbaTMgPBrvBzK1pq-t8q58DBOuwzLqUybs4'
+    axios.defaults.headers['Authorization'] = localStorage.jwtToken
     axios
       // .post('http://localhost:3001/api/v1/classify', form)
       .post('http://localhost:3001/api/v1/classify/authClassify', form)
@@ -57,9 +56,9 @@ class UploadPhoto extends Component {
           ...this.state,
           returnedResults: true,
           classification: response.data.classification
-        });
+        })
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
   }
 
   // Resetting page back to upload photo
@@ -68,19 +67,19 @@ class UploadPhoto extends Component {
       returnedResults: false,
       imagePreviewUrl: null,
       isLoading: false
-    });
+    })
   }
 
   displayLoadingSpinner = () => {
     this.setState({
       isLoading: !this.state.isLoading
-    });
-  };
+    })
+  }
 
   render() {
-    const { imagePreviewUrl, file, returnedResults } = this.state;
-    let _imagePreview = null;
-    let loadingSpinner = null;
+    const { imagePreviewUrl, file, returnedResults } = this.state
+    let _imagePreview = null
+    let loadingSpinner = null
     // Set properties of loading overlay
     if (this.state.isLoading) {
       loadingSpinner = (
@@ -93,14 +92,14 @@ class UploadPhoto extends Component {
             />
           </div>
         </div>
-      );
+      )
     }
     if (imagePreviewUrl) {
       _imagePreview = (
         <img className='img-fluid' src={imagePreviewUrl} alt={file} />
-      );
+      )
     } else {
-      _imagePreview = <p>Please select an image for preview</p>;
+      _imagePreview = <p>Please select an image for preview</p>
     }
     return !returnedResults ? (
       <div className='upload-photo'>
@@ -132,8 +131,8 @@ class UploadPhoto extends Component {
                   type='submit'
                   className='btn btn-danger'
                   onClick={e => this.handleClear(e)}
-                  >
-                    Clear
+                >
+                  Clear
                 </button>
               </div>
             </div>
@@ -147,8 +146,8 @@ class UploadPhoto extends Component {
         classification={this.state.classification}
         reset={() => this.handleReset()}
       />
-    );
+    )
   }
 }
 
-export default withRouter(UploadPhoto);
+export default withRouter(UploadPhoto)
