@@ -1,9 +1,14 @@
-import { LOGIN, LOGOUT } from './types'
+import { LOGIN, SET_CURRENT_USER, LOGOUT } from './types'
 
-export const loginUser = () => ({
+export const loginUser = user => ({
+  payload: user,
   type: LOGIN
 })
 
-export const logoutUser = () => ({
-  type: LOGOUT
-})
+export const logoutUser = () => {
+  localStorage.removeItem('jwtToken')
+
+  return {
+    type: LOGOUT
+  }
+}
