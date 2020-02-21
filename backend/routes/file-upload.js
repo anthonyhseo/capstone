@@ -20,6 +20,4 @@ router.post('/image-upload', (req, res) => {
     })
 })
 
-
-
 module.exports = router
