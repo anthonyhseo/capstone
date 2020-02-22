@@ -12,6 +12,7 @@
     "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs": "^1.2.7",
     "@tensorflow/tfjs-node": "^1.2.7",
+    "aws-sdk": "^2.624.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
