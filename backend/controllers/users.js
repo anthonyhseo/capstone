@@ -46,7 +46,7 @@ exports.loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username })
     if (!user) {
-      return res.status(400).json({ err: 'User not found' })
+      return res.status(400).json({ success: false, err: 'User not found' })
     }
 
     bcrypt.compare(req.body.password, user.password).then(isMatch => {
@@ -61,14 +61,14 @@ exports.loginUser = async (req, res) => {
           process.env.SECRET_OR_KEY,
           { expiresIn: '24h' },
           (err, token) => {
-            res.json({
+            res.status(200).json({
               success: true,
               token: `Bearer ${token}`
             })
           }
         )
       } else {
-        return res.status(400).json({ msg: 'failed' })
+        return res.status(400).json({ success: false, msg: 'Password incorrect' })
       }
     })
   } catch (err) {
