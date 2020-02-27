@@ -5,11 +5,10 @@ const aws = require('aws-sdk')
 
 // Setup AWS config
 aws.config.update({
-    secretAccessKey: 'oumANNScQnDNC4a+mF46dovlJPkCmBgIb/kXuqpb',
-    accessKeyId: 'AKIAINX5SA2YT5462SAQ',
+    secretAccessKey: process.env.AWS_SECRET_KEY,
+    accessKeyId: process.env.AWS_ACCESS_KEY,
     region: 'us-west-2'
 })
-
 
 // Create S3 instance
 const s3 = new aws.S3()
@@ -29,7 +28,6 @@ const createS3Bucket = async (username) =>{
           console.log("Success", data.Location);
         }
       });
-
  }
 
 module.exports = createS3Bucket
