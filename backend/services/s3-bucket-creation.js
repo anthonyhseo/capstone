@@ -4,11 +4,14 @@
 const aws = require('aws-sdk')
 
 // Setup AWS config
+// Credential documentation: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-nodejs.html#getting-started-nodejs-credentials
+// Crednetials located: C:\Users\<username>\.aws\credentials
 aws.config.update({
-    secretAccessKey: process.env.AWS_SECRET_KEY,
-    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: aws.config.credentials.secretAccessKey,
+    accessKeyId: aws.config.credentials.accessKeyId,
     region: 'us-west-2'
 })
+
 
 // Create S3 instance
 const s3 = new aws.S3()
@@ -29,5 +32,6 @@ const createS3Bucket = async (username) =>{
         }
       });
  }
+
 
 module.exports = createS3Bucket

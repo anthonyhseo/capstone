@@ -15,8 +15,7 @@ exports.registerUser = async (req, res) => {
     }
 
     // Create S3 bucket with username 
-    // Should this be an await function?
-    await createS3Bucket(req.body.username)
+    createS3Bucket(req.body.username)
 
     const newUser = new User({
       username: req.body.username,
