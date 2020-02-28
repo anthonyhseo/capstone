@@ -1,18 +1,32 @@
-import React from 'react';
+import React from 'react'
+import jwt_decode from 'jwt-decode'
+import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { loginUser } from './actions/authActions'
 
-import UploadPhoto from './components/UploadPhoto/UploadPhoto';
-import Landing from './components/Landing/Landing';
-import Navbar from './components/Navbar/Navbar';
-import LoginPage from './components/LoginPage/LoginPage';
-import Register from './components/Register/Register';
-import Results from './components/Results/Results';
-import Dashboard from './components/Dashboard/Dashboard';
+import UploadPhoto from './components/UploadPhoto/UploadPhoto'
+import Landing from './components/Landing/Landing'
+import Navbar from './components/Navbar/Navbar'
+import LoginPage from './components/LoginPage/LoginPage'
+import Register from './components/Register/Register'
+import Results from './components/Results/Results'
+import Dashboard from './components/Dashboard/Dashboard'
 
-import './App.css';
+import './App.css'
 
-function App() {
+function App(props) {
+  if (localStorage.jwtToken) {
+    console.log('we have a webtoken. Yay!!!')
+    const user = jwt_decode(localStorage.jwtToken)
+    const currentTime = Date.now() / 1000
+    props.loginUser(user)
+    // props.history.push('/dashboard')
+    if (user.exp < currentTime) {
+      console.log('token expired')
+    }
+  }
+
   return (
     <div className='App'>
       <Router>
@@ -22,10 +36,10 @@ function App() {
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/register' component={Register} />
         <Route exact path='/results' component={Results} />
-        <Route exact path ='/dashboard' component={Dashboard} />
+        <Route exact path='/dashboard' component={Dashboard} />
       </Router>
     </div>
-  );
+  )
 }
 
-export default App;
+export default connect(null, { loginUser })(App)
