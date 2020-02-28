@@ -9,6 +9,7 @@ const aws = require('aws-sdk')
 aws.config.update({
     secretAccessKey: aws.config.credentials.secretAccessKey,
     accessKeyId: aws.config.credentials.accessKeyId,
+
     region: 'us-west-2'
 })
 
