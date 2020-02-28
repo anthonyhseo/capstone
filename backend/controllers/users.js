@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-
 const User = require('../models/User')
+const createS3Bucket = require( '../services/s3-bucket-creation')
 
 exports.test = (req, res) => {
   res.json({ msg: 'users route works' })
@@ -13,6 +13,9 @@ exports.registerUser = async (req, res) => {
     if (user) {
       return res.status(400).send('Username taken')
     }
+
+    // Create S3 bucket with username 
+    createS3Bucket(req.body.username)
 
     const newUser = new User({
       username: req.body.username,
@@ -31,6 +34,8 @@ exports.registerUser = async (req, res) => {
         }
       })
     })
+
+
   } catch (err) {
     console.log(err)
   }
