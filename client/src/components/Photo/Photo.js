@@ -45,7 +45,7 @@ export default function Photo(props) {
         <div className='card photo-card' style={{ width: '18rem' }}>
           <img
             className='card-img-top'
-            src={`http://localhost:3001/api/v1/image/${imageUrl}`}
+            src={imageUrl}
           />
           <div className='card-body'>
             <h5>{title}</h5>
@@ -74,7 +74,7 @@ export default function Photo(props) {
           <div className='col-md-6'>
             <img
               className='img-fluid'
-              src={`http://localhost:3001/api/v1/image/${imageUrl}`}
+              src={imageUrl}
             />
           </div>
         </div>
