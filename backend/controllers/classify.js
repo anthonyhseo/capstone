@@ -16,6 +16,7 @@ exports.upload = multer({
   limits: { fileSize: 10000000 }
 })
 
+
 exports.dummy = () => {
   console.log('hello world')
 }
@@ -66,7 +67,7 @@ exports.authClassify = async (req, res, next) => {
 
     const classification = new Classification({
       user: req.user._id,
-      imageUrl: file.filename,
+      imageUrl: req.body.s3URL,
       classification: result
     })
 

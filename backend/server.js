@@ -9,7 +9,7 @@ const classify = require('./routes/classify')
 const image = require('./routes/image')
 
 // S3 TESTING
-const fileRoutes = require('./routes/file-upload')
+const S3Upload = require('./routes/file-upload')
 
 const connectDB = require('./config/db')
 
@@ -32,7 +32,7 @@ app.use('/api/v1/classify', classify)
 app.use('/api/v1/image', image)
 
 // S3 TESTING
-app.use('/api/v1/s3', fileRoutes)
+app.use('/api/v1/s3', S3Upload)
 
 app.get('/', (req, res) => {
   res.send('Got the request')

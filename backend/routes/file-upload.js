@@ -1,8 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const upload = require('../services/file-upload')
-
-const singleUpload = upload.single('image')
+const uploadToS3 = require('../services/file-upload')
 
 // Testing the route
 router.get('/image-upload', (req, res) => {
@@ -10,13 +8,21 @@ router.get('/image-upload', (req, res) => {
 })
 
 
-
-router.post('/image-upload', (req, res) => {
-    singleUpload(req, res, (err) => {
+// Route to take in form (contains file and username) and passes that data to 
+// uploadToS3 function to then upload the data to S3
+router.post('/image-upload', async (req, res) => {
+    uploadToS3(req, res, (err) => {
+        console.log(`username is ${req.body.username}`)
         if (err) {
             return res.status(422).send({errors: [{title: 'File Upload Error', detail: err.message}]})
+        } else {
+            if (req.file === undefined) {
+                console.log('Error: No File Selected')
+                return res.json('Error: No File Selected')
+            }
         }
-        return res.json({'imageUrl' : req.file.location, file: req.file})
+        return res.send(req.file.location)
+        // return res.json({'imageUrl' : req.file.location})
     })
 })
 
