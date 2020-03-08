@@ -13,10 +13,16 @@ const ClassificationSchema = new Schema({
       }
     }
   ],
+  title: {
+    type: String
+  },
   imageUrl: {
     type: String
   },
   user: {
+    type: Schema.Types.ObjectId
+  },
+  hotel: {
     type: Schema.Types.ObjectId
   }
 })

@@ -12,6 +12,7 @@ import LoginPage from './components/LoginPage/LoginPage'
 import Register from './components/Register/Register'
 import Results from './components/Results/Results'
 import Dashboard from './components/Dashboard/Dashboard'
+import CreateProperty from './components/CreateProperty/CreateProperty'
 
 import './App.css'
 
@@ -37,6 +38,7 @@ function App(props) {
         <Route exact path='/register' component={Register} />
         <Route exact path='/results' component={Results} />
         <Route exact path='/dashboard' component={Dashboard} />
+        <Route exact path='/new-property' component={CreateProperty} />
       </Router>
     </div>
   )

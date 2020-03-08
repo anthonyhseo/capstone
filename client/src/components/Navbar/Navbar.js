@@ -20,7 +20,12 @@ class Navbar extends Component {
     const loggedIn = (
       <ul className='navbar-nav ml-auto'>
         <li className='nav-item'>
-          <Link className='nav-link' to='/dashboard'>
+          <Link className='nav-link' to='/new-property'>
+            Add Property
+          </Link>
+        </li>
+        <li className='nav-item'>
+          <Link className='nav-link' to='/upload'>
             Upload Photo
           </Link>
         </li>
