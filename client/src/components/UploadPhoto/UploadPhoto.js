@@ -4,6 +4,10 @@ import axios from 'axios'
 
 import Results from '../Results/Results'
 import LoadingOverlay from 'react-loading-overlay'
+import { connect } from 'react-redux'
+import { logoutUser } from '../../actions/authActions'
+
+
 
 import './UploadPhoto.css'
 
@@ -59,9 +63,12 @@ class UploadPhoto extends Component {
     console.log(this.state)
   }
 
-  handleUploadImage(e) {
+  async handleUploadImage(e) {
     e.preventDefault()
     const form = new FormData()
+
+    // Append the username to the form
+    form.append('username', this.props.auth.username)
     form.append('myFile', this.state.file)
     form.append(
       'hotel',
@@ -71,17 +78,32 @@ class UploadPhoto extends Component {
     console.log(form)
 
     axios.defaults.headers['Authorization'] = localStorage.jwtToken
-    axios
-      // .post('http://localhost:3001/api/v1/classify', form)
-      .post('http://localhost:3001/api/v1/classify/authClassify', form)
+
+    // POST request to retrieve S3URL 
+    const S3URL = await axios.post('http://localhost:3001/api/v1/s3/image-upload', form, {
+      headers: {
+        'accept': 'application/json',
+        'Accept-Language': 'en-US, en;q=0.8',
+        'Content-Type': `multipart/form-data; boundary=${form._boundary}`
+      }
+    })
+
+    // Append the S3 URL to the form 
+    form.append('s3URL', S3URL.data)
+
+    axios.post('http://localhost:3001/api/v1/classify/authClassify', form)
+      // .post('http://ec2-34-220-221-99.us-west-2.compute.amazonaws.com:3001/api/v1/classify', form)
       .then(response => {
+        console.log(response)
         this.setState({
           ...this.state,
           returnedResults: true,
           classification: response.data.classification
         })
       })
-      .catch(error => console.log(error))
+      .catch (error => {
+        console.log(error)
+      })
   }
 
   changeHotel(value) {
@@ -139,7 +161,7 @@ class UploadPhoto extends Component {
         <div className='upload-container'>
           <div className='row'>
             <div className='col-md-4'>
-              <form onSubmit={e => this.handleUploadImage(e)}>
+              <form onSubmit={e => this.handleUploadImage(e)} encType='multipart/form-data'>
                 <div className='form-group'>
                   <label htmlFor='hotelSelect'>Select Hotel</label>
                   <select
@@ -189,6 +211,7 @@ class UploadPhoto extends Component {
                   </div>
                 </div>
               </form>
+
             </div>
             <div className='image-preview col-md-8'>{_imagePreview}</div>
           </div>
@@ -204,4 +227,9 @@ class UploadPhoto extends Component {
   }
 }
 
-export default withRouter(UploadPhoto)
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps)(withRouter(UploadPhoto))
+

@@ -9,6 +9,9 @@ const classify = require('./routes/classify')
 const image = require('./routes/image')
 const hotel = require('./routes/hotel')
 
+// S3 TESTING
+const S3Upload = require('./routes/file-upload')
+
 const connectDB = require('./config/db')
 
 dotenv.config({ path: './config/config.env' })
@@ -29,6 +32,9 @@ app.use('/api/v1/users', users)
 app.use('/api/v1/classify', classify)
 app.use('/api/v1/image', image)
 app.use('/api/v1/hotel', hotel)
+
+// S3 TESTING
+app.use('/api/v1/s3', S3Upload)
 
 app.get('/', (req, res) => {
   res.send('Got the request')

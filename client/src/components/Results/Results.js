@@ -5,7 +5,6 @@ import './Results.css'
 
 export default class Results extends Component {
   render() {
-
     // return a resultlist component with classified object name 
     const resultItems = this.props.classification.map((item) => {
       var probability = item.probability * 100

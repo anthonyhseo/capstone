@@ -45,4 +45,5 @@ export default function UploadPhotoContainer() {
   ))
 
   return <div className='photo-container'>{photoItem}</div>
+
 }
