@@ -6,8 +6,6 @@ body,
   margin: 0px !important;
 }
 
-
-
 .upload-photo {
   text-align: center;
   height: 100%;
@@ -51,17 +49,12 @@ body,
   border-width: 1px;
   border-style: solid;
   border-color: rgb(190, 187, 187);
-  width: 70%;
-  height: 70%;
-  padding: 5%;
+  width: 80%;
+  min-height: 500px;
+  height: 80%;
+  /* padding: 5%; */
+  padding: 20px;
   margin: auto;
-}
-
-.choose-file {
-  /* position: absolute; */
-  /* top: 10%; */
-  /* left: 10%; */
-  /* border: 2px solid #d6d7da; */
 }
 
 .buttons {
@@ -86,20 +79,16 @@ body,
 }
 
 .image-preview {
-  /* position: absolute; */
-  /* top: 10%;
-  right: 10%; */
-
-  /* display: block;
-  height: 55%;
-  border: 2px dashed #d6d7da; */
-
-  display: flex;
-  width: 50%;
-  height: 50%;
+  width: auto;
+  height: 500px;
   margin: 30px auto;
   border-radius: 10px;
   border: 2px dashed #1c87c9;
+}
+
+.preview-img {
+  height: 90%;
+  width: auto;
 }
 
 .image-preview p {
@@ -108,12 +97,4 @@ body,
   line-height: 16px;
   color: #333333;
   font-size: 16px;
-}
-
-.img-fluid {
-  /* display: block; */
-  max-width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border: 2px dashed #d6d7da;
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import Photo from '../Photo/Photo'
 
 import axios from 'axios'
@@ -6,29 +6,43 @@ import axios from 'axios'
 import resultDataTest from '../../data_testing/resultDataTest.json'
 import './UploadPhotoContainer.css'
 
-export default class UploadPhotoContainer extends Component {
-  state = {
-    classifications: []
-  }
-  componentWillMount() {
-    axios.defaults.headers['Authorization'] = localStorage.jwtToken
-    axios
-      .get('http://localhost:3001/api/v1/classify/getClassifications')
-      .then(res => {
-        this.setState({ classifications: res.data })
-      })
-  }
+export default function UploadPhotoContainer() {
+  const [classifications, setClassifications] = useState([])
+  const [properties, setProperties] = useState([])
 
-  render() {
-    /*
-    const photoItem = resultDataTest.map(item => {
-      return <Photo image={item.image} name={item.name} />
-    })
-    */
-    const photoItem = this.state.classifications.map(item => (
-      <Photo key={item._id} image={item.imageUrl} name={item._id} />
-    ))
+  useEffect(() => {
+    const fetchData = async () => {
+      axios.defaults.headers['Authorization'] = localStorage.jwtToken
+      try {
+        const result = await axios.get(
+          'http://localhost:3001/api/v1/classify/getClassifications'
+        )
+        setClassifications(result.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
 
-    return <div className='photo-container'>{photoItem}</div>
-  }
+    const fetchProperties = async () => {
+      axios.defaults.headers['Authorization'] = localStorage.jwtToken
+      try {
+        const result = await axios.get('http://localhost:3001/api/v1/hotel')
+        // console.log(result.data)
+        setProperties(result.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    fetchData()
+    fetchProperties()
+  }, [])
+
+  // console.log(properties)
+
+  const photoItem = classifications.map(item => (
+    <Photo key={item._id} properties={properties} item={item} />
+  ))
+
+  return <div className='photo-container'>{photoItem}</div>
 }

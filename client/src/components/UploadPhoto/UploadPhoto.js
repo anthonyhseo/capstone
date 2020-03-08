@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 import axios from 'axios'
+
 import Results from '../Results/Results'
-import './UploadPhoto.css'
 import LoadingOverlay from 'react-loading-overlay'
+
+import './UploadPhoto.css'
 
 class UploadPhoto extends Component {
   constructor(props) {
@@ -14,8 +16,23 @@ class UploadPhoto extends Component {
       imagePreviewUrl: '',
       classification: [],
       returnedResults: false,
-      isLoading: false
+      isLoading: false,
+      hotels: [],
+      selectedHotel: ''
     }
+  }
+
+  componentDidMount() {
+    axios.defaults.headers['Authorization'] = localStorage.jwtToken
+    axios
+      .get('http://localhost:3001/api/v1/hotel')
+      .then(response => {
+        console.log(response)
+        this.setState({ ...this.state, hotels: response.data })
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   handleChange(e) {
@@ -46,6 +63,12 @@ class UploadPhoto extends Component {
     e.preventDefault()
     const form = new FormData()
     form.append('myFile', this.state.file)
+    form.append(
+      'hotel',
+      this.state.selectedHotel === null ? null : this.state.selectedHotel
+    )
+
+    console.log(form)
 
     axios.defaults.headers['Authorization'] = localStorage.jwtToken
     axios
@@ -59,6 +82,13 @@ class UploadPhoto extends Component {
         })
       })
       .catch(error => console.log(error))
+  }
+
+  changeHotel(value) {
+    this.setState({
+      ...this.state,
+      selectedHotel: value
+    })
   }
 
   // Resetting page back to upload photo
@@ -96,7 +126,7 @@ class UploadPhoto extends Component {
     }
     if (imagePreviewUrl) {
       _imagePreview = (
-        <img className='img-fluid' src={imagePreviewUrl} alt={file} />
+        <img className='preview-img' src={imagePreviewUrl} alt={file} />
       )
     } else {
       _imagePreview = <p>Please select an image for preview</p>
@@ -107,37 +137,61 @@ class UploadPhoto extends Component {
         <h1 className='textHeading'> Upload a photo.</h1>
 
         <div className='upload-container'>
-          <form onSubmit={e => this.handleUploadImage(e)}>
-            <div className='choose-file'>
-              <input
-                type='file'
-                className='form-control-file'
-                onChange={e => this.handleChange(e)}
-                accept='image/*'
-              />
+          <div className='row'>
+            <div className='col-md-4'>
+              <form onSubmit={e => this.handleUploadImage(e)}>
+                <div className='form-group'>
+                  <label htmlFor='hotelSelect'>Select Hotel</label>
+                  <select
+                    className='form-control'
+                    id='hotelSelect'
+                    value={this.state.selectedHotel}
+                    onChange={e => this.changeHotel(e.target.value)}
+                  >
+                    <option value='' defaultValue>
+                      Select a Hotel
+                    </option>
+                    {this.state.hotels.map(hotel => (
+                      <option value={hotel._id} key={hotel._id}>
+                        {hotel.hotel}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className='form-group'>
+                  <label htmlFor='uploadInput'>Image</label>
+                  <input
+                    type='file'
+                    className='form-control-file'
+                    id='uploadInput'
+                    onChange={e => this.handleChange(e)}
+                    accept='image/*'
+                  />
+                </div>
+                <div>
+                  <div className='upload-btn'>
+                    <button
+                      className='btn btn-primary'
+                      type='submit'
+                      onClick={this.displayLoadingSpinner}
+                    >
+                      Upload
+                    </button>
+                  </div>
+                  <div className='clear-btn'>
+                    <button
+                      type='submit'
+                      className='btn btn-danger'
+                      onClick={e => this.handleClear(e)}
+                    >
+                      Clear
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
-            <div className='buttons'>
-              <div className='upload-btn'>
-                <button
-                  className='btn btn-primary'
-                  type='submit'
-                  onClick={this.displayLoadingSpinner}
-                >
-                  Upload
-                </button>
-              </div>
-              <div className='clear-btn'>
-                <button
-                  type='submit'
-                  className='btn btn-danger'
-                  onClick={e => this.handleClear(e)}
-                >
-                  Clear
-                </button>
-              </div>
-            </div>
-          </form>
-          <div className='image-preview'>{_imagePreview}</div>
+            <div className='image-preview col-md-8'>{_imagePreview}</div>
+          </div>
         </div>
       </div>
     ) : (

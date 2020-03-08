@@ -52,6 +52,7 @@ exports.classify = async (req, res, next) => {
 }
 
 exports.authClassify = async (req, res, next) => {
+  console.log(req)
   const file = req.file
   if (!file) {
     const error = new Error('Please upload a file')
@@ -65,9 +66,11 @@ exports.authClassify = async (req, res, next) => {
     console.log(result)
 
     const classification = new Classification({
+      title: 'New classifcation',
       user: req.user._id,
       imageUrl: file.filename,
-      classification: result
+      classification: result,
+      hotel: req.body.hotel // This should be dynamic
     })
 
     const classify = await classification.save()
@@ -78,8 +81,10 @@ exports.authClassify = async (req, res, next) => {
   }
 }
 
+exports.updateClassify = async (req, res, next) => {}
+
 exports.getClassifications = async (req, res) => {
-  const items = await Classification.find({user: req.user._id})
-  console.log("inside getClassifications")
+  const items = await Classification.find({ user: req.user._id })
+  console.log('inside getClassifications')
   res.send(items)
 }
