@@ -14,6 +14,7 @@ router.post('/image-upload', async (req, res) => {
     uploadToS3(req, res, (err) => {
         console.log(`username is ${req.body.username}`)
         if (err) {
+            console.log(err)
             return res.status(422).send({errors: [{title: 'File Upload Error', detail: err.message}]})
         } else {
             if (req.file === undefined) {

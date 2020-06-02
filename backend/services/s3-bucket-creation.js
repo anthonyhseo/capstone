@@ -26,9 +26,9 @@ const createS3Bucket = async (username) =>{
       // call S3 to create the bucket
       s3.createBucket(bucketParams, (err, data) => {
         if (err) {
-          console.log("Error", err);
+          console.log("Error", err)
         } else {
-          console.log("Success", data.Location);
+          console.log("Success", data.Location)
         }
       });
  }
