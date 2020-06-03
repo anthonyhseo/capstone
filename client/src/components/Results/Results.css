@@ -1,5 +1,10 @@
-body {
-  /* background-color: #2F303A; */
+
+
+.results-page {text-align: center;
+    /* height: 100%; */
+    background: url('../../assets/images/landing_page_dark.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .container {
@@ -10,21 +15,26 @@ body {
 .results-list {
   background-color: lightgray;
   width: 50%;
+  padding-left: 10px;
+  text-align: left;
 }
 
 .results-image {
   width: 50%;
 }
 
-h1 {
-  text-align: left;
-  margin-left: 50px;
-  margin-top: 50px;
+.results-page h1 {
+  text-align: center;
   color: white;
+
 }
 
 h3 {
   text-align: left;
   margin-left: 50px;
   color: white;
+}
+
+.results-page button {
+  margin: 20px;
 }

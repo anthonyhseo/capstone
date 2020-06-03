@@ -53,6 +53,12 @@ export default function Photo(props) {
         </div>
       </a>
       <Modal
+
+style={{
+  overlay: {
+    padding: '100px'
+  }
+}}
         isOpen={showModal}
         onRequestClose={handleCloseModal}
         shouldCloseOnOverlayClick={true}

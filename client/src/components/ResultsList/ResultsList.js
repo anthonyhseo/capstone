@@ -19,14 +19,16 @@ export default class ResultsList extends Component {
     const objects = this.props.className
     return (
       <div>
-        <p className="results-p">
+        
           <input 
             type="checkbox"
             checked={this.state.checked}
             onChange={this.handleCheckBoxChange}
           />
-          {objects}
-        </p>
+          <span className="results-p">
+            {objects}
+          </span>
+          
       </div>
     )
   }

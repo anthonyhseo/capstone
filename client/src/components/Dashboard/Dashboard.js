@@ -11,7 +11,7 @@ class Dashboard extends Component {
       <div className='background-img-container'>
         <h2 className='dashboard-h2'>Dashboard</h2>
 
-        <Link to='/new-property'>Add New Property</Link>
+        {/* <Link to='/new-property'>Add New Property</Link> */}
         <UploadPhotoContainer />
         <LinkContainer to='/upload'>
           <button type='submit' className='btn btn-primary upload-btn'>

@@ -37,6 +37,7 @@ body,
 .textHeading {
   text-align: center;
   margin-bottom: 25px;
+  margin-top: 25px;
   font-family: arial;
   line-height: 16px;
   color: #ffffff;
@@ -55,6 +56,10 @@ body,
   /* padding: 5%; */
   padding: 20px;
   margin: auto;
+}
+
+.row {
+  height: 100%
 }
 
 .buttons {
@@ -80,7 +85,7 @@ body,
 
 .image-preview {
   width: auto;
-  height: 500px;
+  height: 85%;
   margin: 30px auto;
   border-radius: 10px;
   border: 2px dashed #1c87c9;

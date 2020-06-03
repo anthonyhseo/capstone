@@ -14,8 +14,8 @@ export default class Results extends Component {
     })
 
     return (
-      <div>
-        <div>
+      <div className="results-page">
+        
           <h1>Results</h1>
           <div className="container">
             <div className="results-list">
@@ -25,12 +25,12 @@ export default class Results extends Component {
               <ResultImage image={this.props.image} />
             </div>
           </div>
-          <h3>Were objects correctly labeled?</h3>
+          {/* <h3>Were objects correctly labeled?</h3>
           <button style={{ margin: '25px' }} className="btn btn-primary">
             Yes
           </button>
-          <button className="btn btn-primary">No</button>
-        </div>
+          <button className="btn btn-primary">No</button> */}
+        
 
 
         <button 
