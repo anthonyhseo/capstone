@@ -15,6 +15,7 @@ export default function CreateProperty(props) {
       axios.defaults.headers['Authorization'] = localStorage.jwtToken
       const result = await axios.post(
         'http://localhost:3001/api/v1/hotel',
+        // 'ec2-34-220-221-99.us-west-2.compute.amazonaws.com:3001/api/v1/hotel',
         payload
       )
       console.log(result)
