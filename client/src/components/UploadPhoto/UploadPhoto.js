@@ -30,7 +30,7 @@ class UploadPhoto extends Component {
     axios.defaults.headers['Authorization'] = localStorage.jwtToken
     axios
       .get('http://localhost:3001/api/v1/hotel')
-      // .get('http://ec2-34-220-221-99.us-west-2.compute.amazonaws.com:3001/api/v1/hotel')
+      // .get('http://ec2-34-210-193-105.us-west-2.compute.amazonaws.com:3001/api/v1/hotel')
       .then(response => {
         console.log(response)
         this.setState({ ...this.state, hotels: response.data })
@@ -82,7 +82,7 @@ class UploadPhoto extends Component {
 
     // POST request to retrieve S3URL 
     const S3URL = await axios.post('http://localhost:3001/api/v1/s3/image-upload', form, {
-    // const S3URL = await axios.post('http://ec2-34-220-221-99.us-west-2.compute.amazonaws.com:3001/api/v1/s3/image-upload', form, {
+    // const S3URL = await axios.post('http://ec2-34-210-193-105.us-west-2.compute.amazonaws.com:3001/api/v1/s3/image-upload', form, {
       headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US, en;q=0.8',
@@ -95,7 +95,7 @@ class UploadPhoto extends Component {
 
     axios
       .post('http://localhost:3001/api/v1/classify/authClassify', form)
-      // .post('http://ec2-34-220-221-99.us-west-2.compute.amazonaws.com:3001/api/v1/classify/authClassify', form)
+      // .post('ec2-34-210-193-105.us-west-2.compute.amazonaws.com:3001/api/v1/classify/authClassify', form)
       .then(response => {
         console.log(response)
         this.setState({

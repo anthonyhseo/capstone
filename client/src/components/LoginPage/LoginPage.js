@@ -48,7 +48,7 @@ class LoginPage extends Component {
 
       const res = await axios.post(
         'http://localhost:3001/api/v1/users/login',
-        // 'http://ec2-34-220-221-99.us-west-2.compute.amazonaws.com:3001/api/v1/users/login',
+        // 'http://ec2-34-210-193-105.us-west-2.compute.amazonaws.com:3001/api/v1/users/login',
         user,
         config
       )

@@ -16,7 +16,7 @@ export default function UploadPhotoContainer() {
       try {
         const result = await axios.get(
           'http://localhost:3001/api/v1/classify/getClassifications'
-          // 'http://ec2-34-220-221-99.us-west-2.compute.amazonaws.com:3001/api/v1/classify/getClassifications'
+          // 'http://ec2-34-210-193-105.us-west-2.compute.amazonaws.com:3001/api/v1/classify/getClassifications'
         )
         setClassifications(result.data)
       } catch (err) {
@@ -28,7 +28,7 @@ export default function UploadPhotoContainer() {
       axios.defaults.headers['Authorization'] = localStorage.jwtToken
       try {
         const result = await axios.get('http://localhost:3001/api/v1/hotel')
-        // const result = await axios.get('http://ec2-34-220-221-99.us-west-2.compute.amazonaws.com:3001/api/v1/hotel')
+        // const result = await axios.get('http://ec2-34-210-193-105.us-west-2.compute.amazonaws.com:3001/api/v1/hotel')
         // console.log(result.data)
         setProperties(result.data)
       } catch (err) {

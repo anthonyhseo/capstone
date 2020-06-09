@@ -44,10 +44,10 @@ class Register extends Component {
         }
       }
 
-      // const res = await axios.post('http://ec2-54-202-80-154.us-west-2.compute.amazonaws.com:3001/api/v1/users/register', body, config)
+      // const res = await axios.post('http://ec2-34-210-193-105.us-west-2.compute.amazonaws.com:3001/api/v1/users/register', body, config)
       const res = await axios.post(
         'http://localhost:3001/api/v1/users/register',
-        // 'http://ec2-34-220-221-99.us-west-2.compute.amazonaws.com:3001/api/v1/users/register',
+        // 'http://ec2-34-210-193-105.us-west-2.compute.amazonaws.com:3001/api/v1/users/register',
         newUser,
         config
       )
